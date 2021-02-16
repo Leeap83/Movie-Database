@@ -1,45 +1,150 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# MSP3 The Snap Movie Review Website
 
-Welcome USER_NAME,
+![Screenshot]()
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+This is the Website for [The Snap]() which is a Movie Database that allows users to search and leave reviews of movies stored in the database. 
+Useres will be able to register/login to manipulate the database by creating reviews/add movie titles, searching for movies, update or delete 
+reviews/movies they have inputted.  
 
-## Gitpod Reminders
+## User Experience (UX)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
 
-`python3 -m http.server`
+**User stories**
 
-A blue button should appear to click: *Make Public*,
+**External User Goals:**
+* I want to easily search the site for Movies that interest me.
+* I want to be able to see key information regarding this movie.
+* I want to be able to leave a review. 
+* I would like to add missing movie titles.
+* I want to be able to change or delete any reviews I have left.
 
-Another blue button should appear to click: *Open Browser*.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+**Site Owner's Goals:**
+* I want the users to be able to navigate the site easily.
+* I want the users to leave reviews on the site.
+* I want the users to be able to follow a link to buy the movie. 
 
-A blue button should appear to click: *Make Public*,
 
-Another blue button should appear to click: *Open Browser*.
+**Design**
+*  Colour Scheme   
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
 
-## Updates Since The Instructional Video
+*  Typography
+    
+        
+*  Imagery
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+    
+    
+* Wireframes
+[The Snap Wireframe](docs/MovieReview.pdf)
+ 
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+ ## Features
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+ * 
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+## Future Development
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+ ## Technologies Used
+ 
+ **Languages Used** 
+    - HTML
+    - CSS
+    - Python
+ 
 
---------
+**Frameworks, Libraries & Programs Used**
 
-Happy coding!
+1. [Bootstrap 4.5.2](https://getbootstrap.com/):
+ Bootstrap was used to customize the site and make it responsive.
+
+2. [Font Awesome](https://fontawesome.com/):
+ Font Awesome was used to provide the Icons throughout this website.
+
+3. [Google Fonts](https://fonts.google.com/):
+ Google fonts was used to import the font into the style.css file
+
+4. [JQuery](https://jquery.com/):
+ JQuery was used to run the scripts.
+
+5. [Git](https://git-scm.com/): 
+ Git was used by utilizing the Gitpod terminal to commit to Git and push to GitHub.
+
+6. [GitHub](https://github.com/):
+ GitHub was used to create a repository and store the code after it was pushed from Git.
+
+7. [Heroku](https://www.heroku.com):
+ Heroku was used to deploy my app.
+
+8. [Balsamiq](https://balsamiq.com/):
+ Wireframes were created using Balsamiq
+
+9. [Pixabay](https://pixabay.com/):
+ Pixabay was used to source all imagery for the webpage.
+
+10. [MONGODB](https://www.mongodb.com/):
+ MongoDB was used to create and store data in my collection
+
+11. [Flask](https://flask.palletsprojects.com/en/1.1.x/):
+ Flask was used to create a base template that allowed us to Jinja for template inheritance and for-loops.
+
+## Testing
+
+The Freeformatter HTML Validator and W3C CSS Validator were used to validate every page of the project to ensure there were no errors in the project.
+
+[CSS Validator](http://jigsaw.w3.org/css-validator/) - [Results]()
+
+[HTML Validator](https://validator.w3.org/) - [Results]()
+
+
+**Manual Tests for functionality of features**
+    
+* 
+
+**Testing User Stories**
+
+**External User Goals:**
+* 
+    
+    (a)  
+
+
+**Site Owner's Goals:**
+*   
+
+    (a)  
+    ![]()
+
+
+## Bugs
+
+
+## Deployment 
+
+The project was deployed to [Heroku](https://dashboard.heroku.com/apps) Pages using the following steps...
+
+1. 
+
+
+
+## Credits
+
+**Code**
+* 
+
+
+**Content & Media**
+
+Images were sourced from []() and the authours are: 
+
+
+**Acknowledgements**
+
+* My Mentor Aaron Sinnott for feedback
+* Code Institute for training
+
+ 
