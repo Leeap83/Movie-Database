@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Dosis;
+}
+nav {
+    height: 110px;    
+}
+
+nav .logo {
+    font-size: 50px;
+    padding-left: 10px;
+}    
+
+.logo-image {
+    width: 150px;
+    border: #fff;
+    border-style: solid;
+}
+
+nav ul a {
+    font-size: 18px;
+    padding-top: 40px;
+    font-weight: 500;
+}
+
+
+
+.social-networks{
+    text-align: center;
+    height: 100px;
+    
+}
+
+.social-networks li {
+    display:inline;
+}
+
+.social-networks i {
+    font-size: 50px;
+    padding: 20px;
+    color: #fff;
+}
