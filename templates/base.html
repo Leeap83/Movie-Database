@@ -20,13 +20,14 @@
                 <a href="{{ url_for('get_movies')}}" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('get_movies')}}">Home</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url_for('get_movies')}}">Movies</a></li>
                     <li><a href="#">Add Movies</a></li>
                     <li><a href="#">Add Review</a></li>
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Login</a></li>
                     <li><a href="#">Log Out</a></li>
-                    <li><a href="#">Register</a></li>                    
+                    <li><a href="{{ url_for('register')}}">Register</a></li>                    
                 </ul>
             </div>
         </nav>
@@ -39,14 +40,26 @@
             <li><a href="#">Profile</a></li>
             <li><a href="#">Login</a></li>
             <li><a href="#">Log Out</a></li>
-            <li><a href="#">Register</a></li>        
+            <li><a href="{{ url_for('register')}}">Register</a></li>        
         </ul>
     </header>
      <main class="container">
         {% block content %}
         {% endblock %}
     </main>
-    <footer>
+
+    <section>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h4 class="center-align">{{message}}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
+    <footer class="footer">
         <ul class="social-networks grey darken-3">
           <li><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-square"></i></li>
           <li><a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter-square"></i></li>
