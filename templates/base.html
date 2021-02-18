@@ -14,9 +14,9 @@
 <body>
     <header>
         <!-- Main Navbar -->
-        <nav class="navbar grey darken-3">
+        <nav class="navbar  teal lighten-1">
             <div class="container-fluid">              
-                <a class="logo" href="#"><img src="static/images/frog.jpg" alt="" class="logo-image circle" width="100px">    Movie Review</a> 
+                <a class="logo" href="#">Movie Review</a> 
                 <a href="{{ url_for('index')}}" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 
                 <ul class="right hide-on-med-and-down">
@@ -44,7 +44,7 @@
             <li><a href="{{ url_for('register')}}">Register</a></li>        
         </ul>
     </header>
-     <main class="container">
+     <main>
         {% block content %}
         {% endblock %}
     </main>
