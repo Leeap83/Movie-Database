@@ -1,8 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for movie in movies %}
-        {{ movie.movie_title}}<br>
-        {{ movie.director}}<br>
-    {% endfor %}
-
+    <h3 class="center-align">Find Movie</h3>
+    <div class="row">
+        <div class="col s12 m3">
+            <div class="card grey darken-1">    
+                {% for movie in movies %}
+                    <div class="card-content white-text">
+                    <h3>{{ movie.movie_title}}</h3>
+                        <p>Director: {{ movie.director}}</p>
+                        <p>Genre: {{ movie.genre}}</p>
+                        <p>Release Date: {{ movie.release_date}}</p>
+                        Actors:
+                        <p>{{ movie.Actors[0]}}</p>
+                        <p>{{ movie.Actors[1]}}</p>
+                        <p>{{ movie.Actors[2]}}</p>
+                        <p>{{ movie.Actors[3]}}</p> 
+                    </div>                       
+                    <div class="card-action">
+                        <a href="#">This is a link</a>             
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>            
 {% endblock %}

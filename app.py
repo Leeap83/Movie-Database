@@ -26,7 +26,7 @@ def index():
 
 @app.route("/get_movies")
 def get_movies():
-    movies = mongo.db.movies.find()
+    movies = list(mongo.db.movies.find())
     return render_template("movies.html", movies=movies)
 
 
@@ -83,7 +83,7 @@ def profile(username):
 
     if session["register"]:
         return render_template("profile.html", username=username)
-    
+
     return redirect(url_for("login"))
 
 
@@ -92,6 +92,12 @@ def logout():
     flash("You have been logged out")
     session.pop("register")
     return redirect(url_for("login"))
+
+
+@app.route("/add_movie")
+def add_movie():
+    genre = mongo.db.genre.find().sort("genre_type", 1)
+    return render_template("add_movie.html", genre=genre)
 
 
 if __name__ == "__main__":
