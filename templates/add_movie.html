@@ -1,7 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
     <h3 class="center-align">Add Movie</h3>
+    
+    
+    <div class="container">
+        <div class="row card-panel">
+            <form class="col s12" method="POST" action="{{ url_for('add_movie') }}" enctype="multipart/form-data">
+                <!-- Movie Title -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="movie_title" name="movie_title" type="text" class="validate" required>
+                        <label for="movie_title">Movie Title</label>
+                    </div>
+                </div>
+                <!-- Director -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="director" name="director" type="text" class="validate" required>
+                        <label for="director">Director</label>
+                    </div>
+                </div>
+                <!-- Genre Selector -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="genre_type" name="genre_type" class="validate" required>
+                            <option value="" disabled selected>Choose Genre</option>
+                            {% for genres in genre %}
+                                <option value="{{ genres.genre_type }}">{{ genres.genre_type }}</option>
+                            {% endfor %}
+                        </select> 
+                        <label for="genre_type">Genre</label>
+                    </div>
+                </div>
+                <!-- Release Date -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="release_date" name="release_date" type="text" class="datepicker" required>
+                        <label for="release_date">Release Date</label>
+                    </div>
+                </div>
+                <!-- Actors -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="actors[]" type="text" class="validate" required>
+                        <label for="actors">Actors</label>
+                        <input name="actors[1]" type="text" class="validate">
+                        <label for="actors">Actors</label>
+                        <input name="actors[2]" type="text" class="validate">
+                        <label for="actors">Actors</label>
+                        <input name="actors[3]" type="text" class="validate">
+                        <label for="actors">Actors</label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button-->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button type="submit" class="btn-large">
+                            Add Movie <i class="fas fa-plus-square right"></i>
+                        </button>
+                    </div>
+                </div>
 
+            </form>
+        </div>
+    </div>
    
 
 {% endblock %}

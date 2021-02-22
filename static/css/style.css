@@ -9,17 +9,18 @@
     box-sizing: border-box;
 }
 
-html {
-    position: relative;
+html {    
     min-height: 100%;
 }
 
 body {
     font-family: Dosis;
-    font-size: 18px;
-    
+    font-size: 18px;    
 }
 
+.poster {
+    padding-left: 20px;
+}
 /*---------------Navbar*/
 nav .logo {
     font-size: 50px;
@@ -64,14 +65,17 @@ nav ul a {
     color: red;
 }
 
-.card-content {
-    display: block;
+/*---------------Movie Page*/
+.card {
+    display: grid;
+    
+
 }
+
 /*---------------Footer*/
 .footer {
-    position: absolute;
-    bottom: 0;
     
+    bottom: 0;
     width: 100%;
 }
 

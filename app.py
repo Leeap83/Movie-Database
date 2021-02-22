@@ -5,8 +5,15 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+import cloudinary as cloudinary
 if os.path.exists("env.py"):
     import env
+
+cloudinary.config(
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET')
+)
 
 
 app = Flask(__name__)
@@ -94,8 +101,22 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_movie")
+@app.route("/add_movie", methods=["GET", "POST"])
 def add_movie():
+    if request.method == "POST":
+        movie = {
+            "movie_title": request.form.get("movie_title"),
+            "director": request.form.get("director"),
+            "genre": request.form.get("genre"),
+            "release_date": request.form.get("release_date"),
+            "actors": request.form.get("actors"),
+            "poster": request.form.get("poster"),
+            "created_by": session["register"]
+        }
+        mongo.db.movies.insert_one(movie)
+        flash("Movie Added")
+        return redirect(url_for("get_movies"))
+
     genre = mongo.db.genre.find().sort("genre_type", 1)
     return render_template("add_movie.html", genre=genre)
 
