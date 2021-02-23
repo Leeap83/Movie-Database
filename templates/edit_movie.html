@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 class="center-align">Edit Movie</h3>
+    
+    
+    <div class="container">
+        <div class="row card-panel blue-grey darken-1">
+            <form class="col s12" method="POST" action="{{ url_for('edit_movie', movie_id=movie._id) }}" enctype="multipart/form-data">
+                <!-- Movie Title -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="movie_title" name="movie_title" type="text" class="validate" 
+                        value="{{ movie.movie_title }}" required>
+                        <label for="movie_title">Movie Title</label>
+                    </div>
+                </div>
+                <!-- Director -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="director" name="director" type="text" class="validate" 
+                        value="{{ movie.director }}" required>
+                        <label for="director">Director</label>
+                    </div>
+                </div>
+                <!-- Genre Selector -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="genre_type" name="genre_type" class="validate" required>
+                            <option value="" disabled>Choose Genre</option>
+                            {% for genres in genre %}
+                                {% if genres.genre_type == movie.genre_type %}
+                                    <option value="{{ genres.genre_type }}" selected>{{ genres.genre_type }}</option>
+                                {% else %}
+                                    <option value="{{ genres.genre_type }}">{{ genres.genre_type }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select> 
+                        <label for="genre_type">Genre</label>
+                    </div>
+                </div>
+                <!-- Release Date -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="release_date" name="release_date" type="text" class="datepicker validate"
+                        value="{{ movie.release_date}}" required>
+                        <label for="release_date">Release Date</label>
+                    </div>
+                </div>
+                <!-- Actors -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="actors">Actors</label>
+                        <input name="actors[]" type="text" class="validate" value="{{ movie.actors[0]}}">                        
+                        <input name="actors[]" type="text" class="validate" value="{{ movie.actors[1]}}">                       
+                        <input name="actors[]" type="text" class="validate" value="{{ movie.actors[2]}}">                        
+                        <input name="actors[]" type="text" class="validate" value="{{ movie.actors[3]}}">
+                        
+                    </div>
+                </div>
+                <!-- Upload images -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="poster_image" name="poster_image" type="url" class="validate" 
+                        value="{{ movie.poster_image}}" required>
+                        <label for="poster_image">Edit URL for poster image</label>
+                    </div>
+                </div>
+                <!-- Submit Button-->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button type="submit" class="btn-large">
+                            Edit Movie <i class="fas fa-edit right"></i>
+                        </button>
+                        <a href="{{ url_for('get_movies')}}" class="btn-large red">
+                            Cancel <i class="fas fa-times-circle right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+   
+
+{% endblock %}

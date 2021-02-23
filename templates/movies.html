@@ -56,7 +56,11 @@
                                         <p>Added by: {{ movie.created_by }}</p>
                                 </div>
                             </div>
-                            <p class="card-link center"><a href="">Add A Review</a></p>
+                            {% if session.register|lower == movie.created_by|lower %}
+                                <p class="card-link center"><a href="">Add A Review</a></p>
+                                <p class="card-link center"><a href="{{ url_for('edit_movie', movie_id=movie._id) }}">Edit Movie</a></p>
+                                <p class="card-link center"><a href="">Add A Review</a></p>
+                            {% endif %}
                         </div>        
                     </div>                 
                 </div>                   

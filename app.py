@@ -115,6 +115,26 @@ def add_movie():
     return render_template("add_movie.html", genre=genre)
 
 
+@app.route("/edit_movie/<movie_id>", methods=["GET", "POST"])
+def edit_movie(movie_id):
+    if request.method == "POST":
+        edit = {
+            "movie_title": request.form.get("movie_title"),
+            "director": request.form.get("director"),
+            "genre_type": request.form.get("genre_type"),
+            "release_date": request.form.get("release_date"),
+            "actors": request.form.getlist("actors[]"),
+            "poster_image": request.form.get("poster_image"),
+            "created_by": session["register"]
+        }
+        mongo.db.movies.update({"_id": ObjectId(movie_id)}, edit)
+        flash("Movie Successfully Edited")
+
+    movie = mongo.db.movies.find_one({"_id": ObjectId(movie_id)})
+    genre = mongo.db.genre.find().sort("genre_type", 1)
+    return render_template("edit_movie.html", movie=movie, genre=genre)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
