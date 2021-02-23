@@ -5,15 +5,9 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-import cloudinary as cloudinary
+
 if os.path.exists("env.py"):
     import env
-
-cloudinary.config(
-    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    api_key=os.environ.get('CLOUDINARY_API_KEY'),
-    api_secret=os.environ.get('CLOUDINARY_API_SECRET')
-)
 
 
 app = Flask(__name__)
@@ -107,10 +101,10 @@ def add_movie():
         movie = {
             "movie_title": request.form.get("movie_title"),
             "director": request.form.get("director"),
-            "genre": request.form.get("genre"),
+            "genre_type": request.form.get("genre_type"),
             "release_date": request.form.get("release_date"),
-            "actors": request.form.get("actors"),
-            "poster": request.form.get("poster"),
+            "actors": request.form.getlist("actors[]"),
+            "poster_image": request.form.get("poster_image"),
             "created_by": session["register"]
         }
         mongo.db.movies.insert_one(movie)

@@ -18,9 +18,12 @@ body {
     font-size: 18px;    
 }
 
-.poster {
-    padding-left: 20px;
+.card .card-content {
+    padding-left: 10px;
+    padding-right: 10px;
 }
+
+
 /*---------------Navbar*/
 nav .logo {
     font-size: 50px;
