@@ -52,14 +52,15 @@
                                         <p>{{ movie.actors[0]}}</p>
                                         <p>{{ movie.actors[1]}}</p>
                                         <p>{{ movie.actors[2]}}</p>
-                                        <p>{{ movie.actors[3]}}</p>                                
+                                        <p>{{ movie.actors[3]}}</p> 
+                                        <br>                               
                                         <p>Added by: {{ movie.created_by }}</p>
                                 </div>
                             </div>
                             {% if session.register|lower == movie.created_by|lower %}
-                                <p class="card-link center"><a href="">Add A Review</a></p>
-                                <p class="card-link center"><a href="{{ url_for('edit_movie', movie_id=movie._id) }}">Edit Movie</a></p>
-                                <p class="card-link center"><a href="">Add A Review</a></p>
+                                <p class="card-link"><a href="{{ url_for('movie_review', movie_id=movie._id) }}">Add A Review</a></p>
+                                <p class="card-link"><a href="{{ url_for('edit_movie', movie_id=movie._id) }}">Edit Movie</a></p>
+                                <p class="card-link"><a href="">Del</a></p>
                             {% endif %}
                         </div>        
                     </div>                 

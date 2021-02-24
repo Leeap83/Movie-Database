@@ -135,6 +135,42 @@ def edit_movie(movie_id):
     return render_template("edit_movie.html", movie=movie, genre=genre)
 
 
+@app.route("/movie_review/<movie_id>", methods=["GET", "POST"])
+def movie_review(movie_id):
+    if request.method == "POST":
+        review = {
+            "movie_title": request.form.get("movie_title"),
+            "rating": request.form.get("rating"),
+            "review": request.form.get("review"),
+            "created_by": session["register"]
+        }
+        mongo.db.review.insert_one(review)
+        flash("Movie Successfully Reviewed")
+        return redirect(url_for("get_movies"))
+
+    movie = mongo.db.movies.find_one({"_id": ObjectId(movie_id)})
+    genre = mongo.db.genre.find().sort("genre_type", 1)
+    return render_template("movie_review.html", movie=movie, genre=genre)
+
+
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    if request.method == "POST":
+        review = {
+            "movie_title": request.form.get("movie_title"),
+            "rating": request.form.get("rating"),
+            "review": request.form.get("review"),
+            "created_by": session["register"],
+            "review_date": request.form.get("review_date"),
+        }
+        mongo.db.review.insert_one(review)
+        flash("Movie Successfully Reviewed")
+        return redirect(url_for("get_movies"))
+
+    movie = mongo.db.movie.find().sort("movie_title", 1)
+    return render_template("add_review.html", movie=movie)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

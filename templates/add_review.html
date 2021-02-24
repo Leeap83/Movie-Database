@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 class="center-align">Review a Movie</h3>
+    
+    
+    <div class="container">
+        <div class="row card-panel blue-grey darken-1">
+            <form class="col s12" method="POST" action="{{ url_for('add_review') }}">
+                <!-- Movie Title -->
+               <div class="row">
+                    <div class="input-field col s12">
+                        <select id="movie_title" name="movie_title" class="validate" required>
+                            <option value="" disabled selected>Choose Movie</option>
+                            {% for movies in movie %}
+                                <option value="{{ movies.movie_title }}">{{ movies.movie_title }}</option>
+                            {% endfor %}
+                        </select> 
+                        <label for="movie_title">Movie</label>
+                    </div>
+                </div>
+                    
+                <!-- 5 star rating -->
+                <div class="row ratings">
+                    <div class="col s12">
+                        <h6>Star Rating</h6>
+                        <div name="rating" class="stars" data-rating="3">
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                            <span class="star">&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="review" name="review" type="" class="review validate" maxlength="300" required></textarea>
+                        <label for="review">Leave a Review Here</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="review_date" name="review_date" type="text" class="datepicker validate" required>
+                        <label for="review_date">Review Date</label>
+                    </div>
+                </div>
+                <!-- Submit Button-->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button type="submit" class="btn-large">
+                            Post <i class="fas fa-edit right"></i>
+                        </button>
+                        <a href="{{ url_for('get_movies')}}" class="btn-large red">
+                            Cancel <i class="fas fa-times-circle right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let stars = document.querySelectorAll('.star');
+        stars.forEach(function(star){
+            star.addEventListener('click', setRating);
+        });
+
+        let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+        let target = stars[rating - 1];
+        target.dispatchEvent(new MouseEvent('click'));
+    });
+
+    function setRating(ev){
+        let span = ev.currentTarget;
+        let stars = document.querySelectorAll('.star');
+        let match = false;
+        let num = 0;
+        stars.forEach(function(star, index){
+            if(match){
+                star.classList.remove('rated');
+            }else{
+                star.classList.add('rated');
+            }
+            if(star == span){
+                match = true;
+                num = index + 1;
+            }
+        })
+        document.querySelector('.stars').setAttribute('data-rating', num);
+    }
+
+</script>
+
+
+{% endblock %}
+

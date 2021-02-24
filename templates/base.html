@@ -24,7 +24,7 @@
                     <li><a href="{{ url_for('get_movies')}}">Movies</a></li>
                     {% if session.register %}
                         <li><a href="{{ url_for('add_movie')}}">Add Movie</a></li>
-                        <li><a href="#">Add Review</a></li>
+                        <li><a href="{{ url_for('add_review')}}">Add Review</a></li>
                         <li><a href="{{ url_for('profile', username=session['register']) }}">Profile</a></li>
                         <li><a href="{{ url_for('logout')}}">Log Out</a></li>
                     {% else %}
@@ -41,7 +41,7 @@
             <li><a href="{{ url_for('get_movies')}}">Movies</a></li>
             {% if session.register %}
                 <li><a href="{{ url_for('add_movie')}}">Add Movie</a></li>
-                <li><a href="#">Add Review</a></li>
+                <li><a href="{{ url_for('add_review')}}">Add Review</a></li>
                 <li><a href="{{ url_for('profile', username=session['register']) }}">Profile</a></li>
                 <li><a href="{{ url_for('logout')}}">Log Out</a></li>
             {% else %}
