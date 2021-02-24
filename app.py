@@ -28,6 +28,14 @@ def index():
 @app.route("/get_movies")
 def get_movies():
     movies = list(mongo.db.movies.find())
+    review = list(mongo.db.review.find())
+    return render_template("movies.html", movies=movies, review=review)
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    movies = list(mongo.db.movies.find({"$text": {"$search": query}}))
     return render_template("movies.html", movies=movies)
 
 
@@ -135,13 +143,22 @@ def edit_movie(movie_id):
     return render_template("edit_movie.html", movie=movie, genre=genre)
 
 
+@app.route("/delete_movie/<movie_id>")
+def delete_movie(movie_id):
+    mongo.db.movies.remove({"_id": ObjectId(movie_id)})
+    flash("Movie Succesfully Deleted")
+    return redirect(url_for("get_movies"))
+
+
 @app.route("/movie_review/<movie_id>", methods=["GET", "POST"])
 def movie_review(movie_id):
     if request.method == "POST":
         review = {
             "movie_title": request.form.get("movie_title"),
             "rating": request.form.get("rating"),
+            "review_title": request.form.get("review-title"),
             "review": request.form.get("review"),
+            "review_date": request.form.get("review_date"),
             "created_by": session["register"]
         }
         mongo.db.review.insert_one(review)
@@ -159,15 +176,16 @@ def add_review():
         review = {
             "movie_title": request.form.get("movie_title"),
             "rating": request.form.get("rating"),
+            "review_title": request.form.get("review-title"),
             "review": request.form.get("review"),
-            "created_by": session["register"],
             "review_date": request.form.get("review_date"),
+            "created_by": session["register"]
         }
         mongo.db.review.insert_one(review)
         flash("Movie Successfully Reviewed")
         return redirect(url_for("get_movies"))
 
-    movie = mongo.db.movie.find().sort("movie_title", 1)
+    movie = mongo.db.movies.find().sort("movie_title", 1)
     return render_template("add_review.html", movie=movie)
 
 
