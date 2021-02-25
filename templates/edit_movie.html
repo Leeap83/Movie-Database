@@ -22,6 +22,27 @@
                         <label for="director">Director</label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="classification" name="classification" type="text" class="validate" 
+                        value="{{ movie.classification}}" required>
+                        <label for="classification">Classification</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="run_time" name="run_time" type="text" class="validate" 
+                        value="{{ movie.run_time }}" required>
+                        <label for="run_time">Run Time</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="plot" name="plot" type="" class="plot validate" maxlength="500"> "{{ movie.plot }}"
+                        </textarea>
+                        <label for="plot">Plot</label>
+                    </div>
+                </div>
                 <!-- Genre Selector -->
                 <div class="row">
                     <div class="input-field col s12">
@@ -63,6 +84,14 @@
                         <input id="poster_image" name="poster_image" type="url" class="validate" 
                         value="{{ movie.poster_image}}" required>
                         <label for="poster_image">Edit URL for poster image</label>
+                    </div>
+                </div>
+                <!-- Upload  -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="trailer" name="trailer" type="url" class="validate" 
+                        value="{{ movie.trailer }}" required>
+                        <label for="trailer">Add embedded URL for Movie Trailer</label>
                     </div>
                 </div>
                 <!-- Submit Button-->

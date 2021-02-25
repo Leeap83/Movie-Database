@@ -113,21 +113,23 @@ def logout():
 @app.route("/add_movie", methods=["GET", "POST"])
 def add_movie():
     if request.method == "POST":
-        movie = {
+        movies = {
             "movie_title": request.form.get("movie_title"),
             "director": request.form.get("director"),
             "genre_type": request.form.get("genre_type"),
             "release_date": request.form.get("release_date"),
             "actors": request.form.getlist("actors[]"),
             "poster_image": request.form.get("poster_image"),
+            "trailer": request.form.get("trailer"),
             "created_by": session["register"]
         }
-        mongo.db.movies.insert_one(movie)
+        mongo.db.movies.insert_one(movies)
         flash("Movie Added")
         return redirect(url_for("get_movies"))
 
+    movie = mongo.db.movies.find()
     genre = mongo.db.genre.find().sort("genre_type", 1)
-    return render_template("add_movie.html", genre=genre)
+    return render_template("add_movie.html", movie=movie, genre=genre)
 
 
 @app.route("/edit_movie/<movie_id>", methods=["GET", "POST"])
@@ -140,6 +142,7 @@ def edit_movie(movie_id):
             "release_date": request.form.get("release_date"),
             "actors": request.form.getlist("actors[]"),
             "poster_image": request.form.get("poster_image"),
+            "trailer": request.form.get("trailer"),
             "created_by": session["register"]
         }
         mongo.db.movies.update({"_id": ObjectId(movie_id)}, edit)
@@ -200,26 +203,3 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
-
-
-"""
-Convert standard Youtube URLs into their embedded versions,
-accept one of the following format:
-- https://www.youtube.com/watch?v=G_sskTsokZ0
-- https://www.youtube.com/watch?v=G_sskTsokZ0&feature=youtu.be
-- https://www.youtube.com/embed/G_sskTsokZ0
-- https://youtu.be/G_sskTsokZ0
-- https://youtu.be/G_sskTsokZ0?t=15
-- http://y2u.be/G_sskTsokZ0
-And return this:
-- https://www.youtube.com/embed/G_sskTsokZ0
-"""
-
-def convert_url(url):
-    if url[:24] == "https://www.youtube.com/": 
-        url = url[:43] 
-    elif url[:17] == "https://youtu.be/":
-        url = url[:28]
-    video_id = url[-11:]
-    embedded_url = "https://www.youtube.com/embed/" + video_id
-    return embedded_url
