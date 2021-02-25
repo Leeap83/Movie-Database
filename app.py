@@ -29,14 +29,21 @@ def index():
 def get_movies():
     movies = list(mongo.db.movies.find())
     review = list(mongo.db.review.find())
-    return render_template("movies.html", movies=movies, review=review)
+    return render_template("get_movies.html", movies=movies, review=review)
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
     movies = list(mongo.db.movies.find({"$text": {"$search": query}}))
-    return render_template("movies.html", movies=movies)
+    return render_template("get_movies.html", movies=movies)
+
+
+@app.route("/movie_details/<movie_id>")
+def movie_details(movie_id):
+    movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
+    review = mongo.db.review.find().sort("review_date", 1)
+    return render_template("movie_details.html", movie=movie, review=review)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -193,3 +200,26 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
+
+
+"""
+Convert standard Youtube URLs into their embedded versions,
+accept one of the following format:
+- https://www.youtube.com/watch?v=G_sskTsokZ0
+- https://www.youtube.com/watch?v=G_sskTsokZ0&feature=youtu.be
+- https://www.youtube.com/embed/G_sskTsokZ0
+- https://youtu.be/G_sskTsokZ0
+- https://youtu.be/G_sskTsokZ0?t=15
+- http://y2u.be/G_sskTsokZ0
+And return this:
+- https://www.youtube.com/embed/G_sskTsokZ0
+"""
+
+def convert_url(url):
+    if url[:24] == "https://www.youtube.com/": 
+        url = url[:43] 
+    elif url[:17] == "https://youtu.be/":
+        url = url[:28]
+    video_id = url[-11:]
+    embedded_url = "https://www.youtube.com/embed/" + video_id
+    return embedded_url

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <!--Movie Title-->
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m8 offset-m2 center movie_title">
+                <h4>{{ movie.movie_title }}</h4>
+            </div>
+        </div>
+    </div>
+    <!--Movie Poster-->
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m4 offset-m4 center">                
+                    <img class="poster_image " src="{{ movie.poster_image }}" alt="{{ movie.movie_title }} image" height="300px">                
+            </div>
+        </div>
+    </div>
+    <!--Movie Details-->
+    <div class="section">
+        <div class="row">
+            <div class="col s12 movie_details">
+                <h5>Move Information</h5>
+                <p><strong>Director:</strong> {{ movie.director}}</p>      
+                <p><strong>Genre:</strong> {{ movie.genre_type}}</p>
+                <p><strong>Release Date:</strong> {{ movie.release_date}}</p>                                
+                <p><strong>Actors:</strong> {{ movie.actors[0]}}, {{ movie.actors[1]}}, 
+                {{ movie.actors[2]}}, {{ movie.actors[3]}}</p><br>
+            </div>
+            <div class="col s12 movie_trailer">
+                <h5>Trailer</h5>
+                <iframe width="560" height="315" src= "{{ movie.trailer }}" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+    </div>
+    <!--Reviews-->
+
+                       
+{% endblock %}

@@ -12,8 +12,9 @@
                         <label for="query">Search Movies</label>
                     </div>
                     <div class="col s12 m4">
-                        <a href="{{ url_for('get_movies') }}" class="btn">Reset</a>
                         <button type="submit" class="btn">Search</button>
+                        <a href="{{ url_for('get_movies') }}" class="btn blue-grey darken-1">Reset</a>
+                        
                     </div>
                 </div>
             </form>
@@ -28,7 +29,7 @@
                     <div class="card">
                         <!-- Movie poster -->
                         <div class="card-image">
-                            <a href="">
+                            <a href="#">
                                 <img src="{{ movie.poster_image}}" alt="{{ movie_title}} image" height="400px">
                             </a>        
                         </div>
@@ -89,6 +90,7 @@
                             </ul>
 
                             {% if session.register|lower == movie.created_by|lower %}
+                                <p class="card-link"><a href="{{ url_for('movie_details', movie_id=movie._id) }}">View</a></p>
                                 <p class="card-link"><a href="{{ url_for('movie_review', movie_id=movie._id) }}">Add A Review</a></p>
                                 <p class="card-link"><a href="{{ url_for('edit_movie', movie_id=movie._id) }}">Edit Movie</a></p>
                                 <p class="card-link"><a href="{{ url_for('delete_movie', movie_id=movie._id) }}">Delete Movie</a></p>
@@ -112,6 +114,4 @@
     
       
     
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-    </div>
-  </div>
+    
