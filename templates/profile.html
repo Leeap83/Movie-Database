@@ -8,6 +8,24 @@
             </div>
         </div>
     </div>
+    <h4>My Reviews</h4>
+    <ul class="collapsible">
+        {% for reviews in review %}
+            {% if session.register|lower == reviews.created_by|lower %}
+            <li>
+                <div class="collapsible-header">
+                    <i class="fas fa-caret-down"></i>
+                    <p><strong>"{{ reviews.review_title}}"</strong> {{ reviews.rating}}/5</p>
+                </div>
+                <div class="collapsible-body">
+                    <p>{{ reviews.review }}</p>
+                    <p>Review Date: {{ reviews.review_date }}</p>
+                    <p>Reviewed By: {{ reviews.created_by }}</p>
+                </div>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
   
     
 

@@ -71,6 +71,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
@@ -98,7 +99,8 @@ def profile(username):
         {"username": session["register"]})["username"]
 
     if session["register"]:
-        return render_template("profile.html", username=username)
+        review = mongo.db.review.find()
+        return render_template("profile.html", username=username, review=review)
 
     return redirect(url_for("login"))
 
@@ -185,7 +187,6 @@ def add_review():
     if request.method == "POST":
         review = {
             "movie_title": request.form.get("movie_title"),
-            "movie_id": ObjectId,
             "rating": request.form.get("rating"),
             "review_title": request.form.get("review-title"),
             "review": request.form.get("review"),
