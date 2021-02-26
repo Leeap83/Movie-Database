@@ -1,6 +1,6 @@
 import os
 from flask import (
-    Flask, flash, render_template, 
+    Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -76,12 +76,14 @@ def login():
             {"username": request.form.get("username").lower()})
 
         if existing_user:
+
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
-                    session["register"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(request.form.get("username")))
-                    return redirect(url_for(
-                        "profile", username=session["register"]))
+                session["register"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(
+                    request.form.get("username")))
+                return redirect(url_for(
+                    "profile", username=session["register"]))
 
             else:
                 flash("Incorrect Username and/or Password")
@@ -100,7 +102,8 @@ def profile(username):
 
     if session["register"]:
         review = mongo.db.review.find()
-        return render_template("profile.html", username=username, review=review)
+        return render_template(
+            "profile.html", username=username, review=review)
 
     return redirect(url_for("login"))
 
