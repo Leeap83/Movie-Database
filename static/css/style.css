@@ -74,31 +74,16 @@ nav ul a {
 }
 /*---------------movie review*/
 
+.star-input {
+    display: none;
+}
+
 .star {
-    color: goldenrod;
-    font-size: 2.0rem;
-    padding: 0 1rem;
+    color: gold;
 }
 
-.star::before {
-    content: '\2606';
-    cursor: pointer;
-}
-
-.star.rated::before {
-    content: '\2605';
-}
-
-.stars {
-    counter-reset: rate 0;
-}
-
-.star.rated {
-    counter-increment: rate 1;
-}
-
-.stars::after {
-    content: counter(rate) '/5';
+.star-input:checked + .star ~ .star {
+    color: #fff;
 }
 
 /*---------------Footer*/

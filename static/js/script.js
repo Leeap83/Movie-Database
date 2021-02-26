@@ -2,6 +2,7 @@
     $(".sidenav").sidenav({edge: "right"});
     $('.collapsible').collapsible();
     $('select').formSelect();
+    $("input[type='radio'] [name='rating']:checked").val();
     $('.datepicker').datepicker({
         format: "dd mmmm, yyyy",
         yearRange: [1950,2025],

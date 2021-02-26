@@ -3,7 +3,7 @@
     <!--Movie Title-->
     <div class="section">
         <div class="row">
-            <p class="card-link"><a href="{{ url_for('get_movies') }}"><i class="fas fa-times right"></i></a></p>
+            <p><a href="{{ url_for('get_movies') }}"><i class="fas fa-times right"></i></a></p>
             <div class="col s12 m8 offset-m2 movie_title center">
                 <h4>{{ movie.movie_title }}</h4>
             </div>
@@ -42,7 +42,7 @@
                             <li>
                                 <div class="collapsible-header">
                                     <i class="fas fa-caret-down"></i>
-                                    <strong>"{{ reviews.review_title}}"</strong>
+                                    <p><strong>"{{ reviews.review_title}}"</strong> {{ reviews.rating}}/5</p>
                                 </div>
                                 <div class="collapsible-body">
                                     <p>{{ reviews.review }}</p>

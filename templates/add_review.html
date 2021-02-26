@@ -23,12 +23,17 @@
                 <div class="row ratings">
                     <div class="col s12">
                         <h6>Star Rating</h6>
-                        <div name="rating" class="stars" data-rating="3">
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
-                            <span class="star">&nbsp;</span>
+                        <div name="stars" class="stars" id="checked">
+                            <input type="radio" class="star-input rated" name="rating" id="star-1" value="1">
+                            <label for="star-1" class="star"><i class="fas fa-star"></i></label> 
+                            <input type="radio" class="star-input" name="rating" id="star-2" value="2">
+                            <label for="star-2" class="star"><i class="fas fa-star"></i></label> 
+                            <input type="radio" class="star-input" name="rating" id="star-3" value="3">
+                            <label for="star-3" class="star"><i class="fas fa-star"></i></label> 
+                            <input type="radio" class="star-input" name="rating" id="star-4" value="4">
+                            <label for="star-4" class="star"><i class="fas fa-star"></i></label> 
+                            <input type="radio" class="star-input" name="rating" id="star-5" value="5" checked>
+                            <label for="star-5" class="star"><i class="fas fa-star"></i></label> 
                         </div>
                     </div>
                 </div>
@@ -66,39 +71,9 @@
             </form>
         </div>
     </div>
-<script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-        let stars = document.querySelectorAll('.star');
-        stars.forEach(function(star){
-            star.addEventListener('click', setRating);
-        });
 
-        let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
-        let target = stars[rating - 1];
-        target.dispatchEvent(new MouseEvent('click'));
-    });
 
-    function setRating(ev){
-        let span = ev.currentTarget;
-        let stars = document.querySelectorAll('.star');
-        let match = false;
-        let num = 0;
-        stars.forEach(function(star, index){
-            if(match){
-                star.classList.remove('rated');
-            }else{
-                star.classList.add('rated');
-            }
-            if(star == span){
-                match = true;
-                num = index + 1;
-            }
-        })
-        document.querySelector('.stars').setAttribute('data-rating', num);
-    }
-
-</script>
 
 
 {% endblock %}

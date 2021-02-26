@@ -185,6 +185,7 @@ def add_review():
     if request.method == "POST":
         review = {
             "movie_title": request.form.get("movie_title"),
+            "movie_id": ObjectId,
             "rating": request.form.get("rating"),
             "review_title": request.form.get("review-title"),
             "review": request.form.get("review"),
