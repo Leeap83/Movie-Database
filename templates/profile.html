@@ -15,14 +15,26 @@
             <li>
                 <div class="collapsible-header">
                     <i class="fas fa-caret-down"></i>
-                    <p><strong>"{{ reviews.review_title}}"</strong> {{ reviews.rating}}/5</p>
+                    <p><strong>"{{ reviews.review_title}}"</strong> {{ reviews.rating}}/5</p> 
                 </div>
                 <div class="collapsible-body">
                     <p>{{ reviews.review }}</p>
                     <p>Review Date: {{ reviews.review_date }}</p>
                     <p>Reviewed By: {{ reviews.created_by }}</p>
+                    <a class="btn red modal-trigger" href="#delete-review-modal">Delete Review</a>
                 </div>
             </li>
+            <!-- Modal Structure -->
+            <div id="delete-review-modal" class="modal">
+                <div class="modal-content">
+                    <h4>Delete Review</h4>
+                    <p>Do you wish to Delete this review?</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="modal-close btn-flat">Cancel</a>
+                    <a href="{{ url_for('delete_review', reviews_id=reviews._id) }}" class="modal-close btn-flat">Delete</a>
+                </div>
+            </div>
             
             {% endif %}
         {% endfor %}

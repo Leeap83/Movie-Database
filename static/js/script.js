@@ -3,6 +3,7 @@
     $('.collapsible').collapsible();
     $('select').formSelect();
     $("input[type='radio'] [name='rating']:checked").val();
+    $('.modal').modal();
     $('.datepicker').datepicker({
         format: "dd mmmm, yyyy",
         yearRange: [1950,2025],

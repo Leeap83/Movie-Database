@@ -204,6 +204,17 @@ def add_review():
     return render_template("add_review.html", movie=movie)
 
 
+@app.route("/delete_review/<reviews_id>")
+def delete_review(reviews_id):
+    mongo.db.review.remove({"_id": ObjectId(reviews_id)})
+    flash("Review Succesfully Deleted")
+
+    reviews = mongo.db.review.find_one({"_id": ObjectId(reviews_id)})
+    username = mongo.db.users.find_one(
+        {"username": session["register"]})["username"]
+    return render_template("profile.html", username=username, reviews=reviews)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
