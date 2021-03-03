@@ -3,9 +3,11 @@
     <!--Movie Title-->
     <div class="section">
         <div class="row">
-            <p><a href="{{ url_for('get_movies') }}"><i class="fas fa-times right"></i></a></p>
-            <div class="col s12 m8 offset-m2 movie_title center">
+            <div class="col s10 m8 offset-m2 movie_title center">
                 <h4>{{ movie.movie_title }}</h4>
+            </div>
+            <div class="col s2">
+                <p><a href="{{ url_for('get_movies') }}"><i class="fas fa-times right"></i></a></p>
             </div>
         </div>
     </div>
@@ -13,7 +15,15 @@
     <div class="section">
         <div class="row">
             <div class="col s12 m8 offset-m2 center">                
-                    <img class="poster_image " src="{{ movie.poster_image }}" alt="{{ movie.movie_title }} image" width="300px">                
+                <img class="poster_image " src="{{ movie.poster_image }}" alt="{{ movie.movie_title }} image" width="300px">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m8 offset-m2 center">
+                <a class="waves-effect waves-light btn"
+                    href="{{ url_for('add_favourites', movie_id=movie._id) }}">
+                    <i class="fas fa-heart right"></i>Add to Favourites
+                </a>
             </div>
         </div>
     </div>

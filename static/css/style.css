@@ -7,13 +7,6 @@
     padding: 0;
     border: 0;
     box-sizing: border-box;
-}
-
-html {    
-    min-height: 100%;
-}
-
-body {
     font-family: Dosis;
     font-size: 18px;    
 }
@@ -70,7 +63,13 @@ nav ul a {
 
 /*---------------Movie Page*/
 
+.card .card-title {
+    font-size: 18px;
+}
 
+.fa-heart {
+    color: red;
+}
 /*---------------movie review*/
 
 .star-input {
