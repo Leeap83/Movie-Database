@@ -25,6 +25,10 @@
                                     <!-- Movie Title -->
                                     <div class="col s10">
                                         <p class="card-title white-text">{{ favourite.movie_title}}</p>
+                                        <a class="btn red modal-trigger" 
+                                        href="{{ url_for('remove_favourites', movie_id=favourite._id, user=user['username']) }}">
+                                        Remove Favourite
+                                        </a>
                                     </div>
                                 </div>
                             </div>

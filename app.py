@@ -274,6 +274,29 @@ def add_favourites(movie_id):
         'movie_details', user=user['username'], movie_id=movie_id))
 
 
+@app.route('/remove_favourites/<movie_id>', methods=["GET", "POST"])
+def remove_favourites(movie_id):
+
+    # Identifies the current user
+    user = mongo.db.users.find_one({"username": session['register']})
+
+    favourites = user['favourite_movies']
+
+    # Removes movie from user's favourites
+    if ObjectId(movie_id) in favourites:
+        mongo.db.users.update(
+            {"username": session['register']},
+            {"$pull": {"favourite_movies": ObjectId(movie_id)}})
+
+        mongo.db.movies.update(
+            {'_id': ObjectId(movie_id)},
+            {'$inc': {'favourite_count': -1}})
+
+    flash('Removed from My Favourites.')
+    return redirect(url_for("profile", user=user['username'], movie_id=movie_id))
+
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
