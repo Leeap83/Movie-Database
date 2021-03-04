@@ -16,6 +16,10 @@
     padding-right: 10px;
 }
 
+.input-field label {
+    color: #eceff1
+}
+
 
 /*---------------Navbar*/
 nav .logo {
@@ -55,6 +59,9 @@ nav ul a {
     font-weight: 700;
 }
 
+h2 {
+    margin: 10px;
+}
 /*---------------Flash Messages*/
 .flashes h4 {
     
@@ -62,10 +69,6 @@ nav ul a {
 }
 
 /*---------------Movie Page*/
-
-.card .card-title {
-    font-size: 18px;
-}
 
 .fa-heart {
     color: red;

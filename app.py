@@ -46,6 +46,8 @@ def movie_details(movie_id):
     return render_template("movie_details.html", movie=movie, review=review)
 
 
+# User functions #
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -58,7 +60,8 @@ def register():
 
         register = {
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
+            "favourite_movies": []
         }
         mongo.db.users.insert_one(register)
 
@@ -95,6 +98,15 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/logout")
+def logout():
+    flash("You have been logged out")
+    session.pop("register")
+    return redirect(url_for("login"))
+
+
+# User Profile #
+
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     username = mongo.db.users.find_one(
@@ -102,20 +114,16 @@ def profile(username):
 
     if session["register"]:
         review = mongo.db.review.find()
-        favourites = mongo.db.users.find()
+
         return render_template(
-            "profile.html", username=username, review=review,
-            favourites=favourites)
+            "profile.html",
+            username=username,
+            review=review)
 
     return redirect(url_for("login"))
 
 
-@app.route("/logout")
-def logout():
-    flash("You have been logged out")
-    session.pop("register")
-    return redirect(url_for("login"))
-
+# CRUD Movie Functions #
 
 @app.route("/add_movie", methods=["GET", "POST"])
 def add_movie():
@@ -173,6 +181,8 @@ def delete_movie(movie_id):
     return redirect(url_for("get_movies"))
 
 
+# CRUD Movie Review functions #
+
 @app.route("/movie_review/<movie_id>", methods=["GET", "POST"])
 def movie_review(movie_id):
     if request.method == "POST":
@@ -223,6 +233,8 @@ def delete_review(reviews_id):
     return render_template("profile.html", username=username, reviews=reviews)
 
 
+# Add Favourites #
+
 @app.route('/add_favourites/<movie_id>', methods=["GET", "POST"])
 def add_favourites(movie_id):
     # Checks if user is in session
@@ -233,25 +245,23 @@ def add_favourites(movie_id):
         favourites = user['favourite_movies']
 
         if ObjectId(movie_id) not in favourites:
-            mongo.db.users.update_one({"username": session['register']},
-                                                    {"$push" :
-                                                        {"favourite_movies" : ObjectId(movie_id)}})
+            mongo.db.users.update_one(
+                {"username": session['register']},
+                {"$push": {"favourite_movies": ObjectId(movie_id)}})
 
-            mongo.db.movies.update({'_id': ObjectId(movie_id)},
-                                                {'$inc': {'favourite_count': 1}})
+            mongo.db.movies.update(
+                {'_id': ObjectId(movie_id)},
+                {'$inc': {'favourite_count': 1}})
 
         else:
 
             flash("You have already added this Movie to your Favourites")
             return redirect(url_for('movie_details',
                                     user=user['username'], movie_id=movie_id))
-    else:
-        flash("You must be logged in to add to Favourites!")
-
 
     flash('Added to My Favourites.')
-    return redirect(url_for('movie_details',
-        user=user['username'], movie_id=movie_id))
+    return redirect(url_for(
+        'movie_details', user=user['username'], movie_id=movie_id))
 
 
 if __name__ == "__main__":
