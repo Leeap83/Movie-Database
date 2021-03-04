@@ -65,7 +65,6 @@ information regarding the movie and shows all reviews of this movie and allows u
 allows users to close this view and return back to all movies.
 *  Regiser - Each user has the opportunity to register an account and have access to additional features such as adding to favourites, editing, 
 deleting and creating movies and the ability to add and delete reviews.
-*  Log In -
 *  Add & Edit Movies - As part of the CRUD funtion required for this site, registered users
 can create a new Movies by using the Add movie link in the Navbar. Users can update the movie details of the movies they 
 have added using the visable link in the card reveal panel on the movie cards. 

@@ -23,6 +23,9 @@
     color: #eceff1
 }
 
+.fav {
+    width: 100px;
+}
 
 /*---------------Navbar*/
 nav .logo {

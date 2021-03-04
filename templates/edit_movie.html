@@ -22,6 +22,7 @@
                         <label for="director">Director</label>
                     </div>
                 </div>
+                <!-- Classification  -->
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="classification" name="classification" type="text" class="validate" 
@@ -29,6 +30,7 @@
                         <label for="classification">Classification</label>
                     </div>
                 </div>
+                <!-- Run Time -->
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="run_time" name="run_time" type="text" class="validate" 
@@ -36,6 +38,7 @@
                         <label for="run_time">Run Time</label>
                     </div>
                 </div>
+                <!-- Plot -->
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea id="plot" name="plot" type="" class="plot validate" maxlength="500"> "{{ movie.plot }}"
@@ -75,7 +78,6 @@
                         <input name="actors[]" type="text" class="validate" value="{{ movie.actors[1]}}">                       
                         <input name="actors[]" type="text" class="validate" value="{{ movie.actors[2]}}">                        
                         <input name="actors[]" type="text" class="validate" value="{{ movie.actors[3]}}">
-                        
                     </div>
                 </div>
                 <!-- Upload images -->
@@ -105,7 +107,6 @@
                         </a>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

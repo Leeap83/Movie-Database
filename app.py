@@ -115,10 +115,20 @@ def profile(username):
     if session["register"]:
         review = mongo.db.review.find()
 
+        user_in_db = mongo.db.users.find_one({"username": session["register"]})
+        favourites = mongo.db.users.find(user_in_db)
+
+        # Defines favourite_recipes array from current User document
+        favourites_movies = user_in_db["favourite_movies"]
+
+        favs = mongo.db.movies.find({"_id": {
+                                    "$in": favourites_movies}
+                            })
+
         return render_template(
-            "profile.html",
-            username=username,
-            review=review)
+            "profile.html", username=username, review=review, user=user_in_db,
+            favourites=favourites, favourites_movies=favourites_movies,
+            favs=favs)
 
     return redirect(url_for("login"))
 

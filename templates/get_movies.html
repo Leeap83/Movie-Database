@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h3 class="center-align">Find Movie</h3>
-
+    <!-- Search Bar -->
     <div class="container">
         <div class="row card-panel">
             <form action="{{ url_for('search') }}" method="post" class="col s12">
@@ -62,6 +62,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Movie Info -->
                             <div class="row movie-details">
                                 <div class="col s12">                                
                                     <p><strong>Director:</strong> {{ movie.director}}</p>      
@@ -76,6 +77,7 @@
                                         <p><strong>Added by:</strong> {{ movie.created_by }}</p>
                                 </div>
                             </div>
+                            <!-- Card Links -->
                             <div class="View More">
                                 <p class="card-link btn"><a href="{{ url_for('movie_details', movie_id=movie._id) }}" class="white-text">View Movie Details</a></p>
                             </div>
