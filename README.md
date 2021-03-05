@@ -136,6 +136,9 @@ favourites.
 [YouTube](https://www.youtube.com/):
  YouTube was used to source the embeded movie trailers. 
 
+[Giphy](https://giphy.com/):
+ Giphy was used to source the images for the Error 403, 404, 410 & 500.html pages.
+
 ## Testing
 
 The Freeformatter HTML Validator and W3C CSS Validator were used to validate every page of the project to ensure there were no errors in the project.
@@ -183,13 +186,16 @@ The project was deployed to [Heroku](https://dashboard.heroku.com/apps) Pages us
 ## Credits
 
 **Code**
-* 
+* Error Pages - [Flask Pallets Projects](https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/) was read to understand how to create
+custom error pages.
+
 
 
 **Content & Media**
 
 - The Homepage background image was sourced from [Pixabay](https://pixabay.com/photos/starwars-fantasy-movie-figure-5355787/) and the authours was enriquelopezgarre 
 - All other images are links to the url from google search for movie posters
+- Giphy was used to source the Images on the error pages.
 
 
 **Acknowledgements**

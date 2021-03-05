@@ -1,7 +1,7 @@
 import os
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for)
+    redirect, request, session, url_for, abort)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -22,6 +22,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/index")
 def index():
+
     return render_template("index.html")
 
 
@@ -300,6 +301,28 @@ def remove_favourites(movie_id):
         return redirect(url_for(
             'profile', user=user['username'],
             username=username, movie_id=movie_id))
+
+
+# Errors #
+
+@app.errorhandler(403)
+def page_forbidden(e):
+    return render_template('403.html'), 403
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(410)
+def page_gone(e):
+    return render_template('410.html'), 410
+
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
 
 
 if __name__ == "__main__":
