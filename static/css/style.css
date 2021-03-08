@@ -86,6 +86,12 @@ h2 {
     color: red;
 }
 
+/*---------------Movie Details*/
+.amazon {
+    height: 50px;
+    width: 150px;
+}
+
 /*---------------Favourites*/
 
 .fa-heart {
