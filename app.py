@@ -22,12 +22,16 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/index")
 def index():
-
+    """
+    Home Page for the Website. Invites users to Start Browsing, 
+    Sign-In or Register a new account
+    """
     return render_template("index.html")
 
 
 @app.route("/get_movies")
 def get_movies():
+    "Movies Page displays all movies to the users"
     movies = list(mongo.db.movies.find().sort("movie_title", 1))
     review = list(mongo.db.review.find())
     return render_template("get_movies.html", movies=movies, review=review)
@@ -35,6 +39,10 @@ def get_movies():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """
+    Search bar that uses the indexes created in MongoDB's allows the users to search for any movie title, director or actor name.
+    The results are then displayed. If there are no results for the user's query, then message displayed telling user no matches.
+    """
     query = request.form.get("query")
     movies = list(mongo.db.movies.find({"$text": {"$search": query}}))
     return render_template("get_movies.html", movies=movies)
@@ -42,7 +50,12 @@ def search():
 
 @app.route("/movie_details/<movie_id>")
 def movie_details(movie_id):
+    """ Movie Details page. Displays the movie details stored in MongoDB after users clicks
+    view more button
+    """
+    # identifies the current movie and returns the movie details 
     movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
+    # Finds and returns all reviews stored on the MongoDB
     review = mongo.db.review.find().sort("review_date", 1)
     return render_template("movie_details.html", movie=movie, review=review)
 
@@ -51,21 +64,24 @@ def movie_details(movie_id):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Registers new users to the website.
+    """
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-
+        # Check if username is already registered 
         if existing_user:
             flash("Username exists try another")
             return redirect(url_for("register"))
-
+        # Creates a new user with a hashed password and creates a favourites array
         register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
             "favourite_movies": []
         }
         mongo.db.users.insert_one(register)
-
+        # logs user into session cookie called 'register' 
         session["register"] = request.form.get("username").lower()
         flash("Successfully registered, welcome!")
         return redirect(url_for("profile", username=session["register"]))
@@ -74,11 +90,14 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Logs the user into the website. 
+    """
     if request.method == "POST":
-
+        # Check if user is registered
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-
+        # if existing user, redirects user to profile page 
         if existing_user:
 
             if check_password_hash(
@@ -88,11 +107,11 @@ def login():
                     request.form.get("username")))
                 return redirect(url_for(
                     "profile", username=session["register"]))
-
+            
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
-
+        # if not an existing user, redirects user to login page 
         else:
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
@@ -101,6 +120,9 @@ def login():
 
 @app.route("/logout")
 def logout():
+    """
+    Logs the users out of the session
+    """
     flash("You have been logged out")
     session.pop("register")
     return redirect(url_for("login"))
@@ -110,16 +132,20 @@ def logout():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    """
+    Users Profile page displays the users reviews and Favourite movies.
+    """
     username = mongo.db.users.find_one(
         {"username": session["register"]})["username"]
 
     if session["register"]:
+        # Displays the reviews the user created
         review = mongo.db.review.find()
 
         user_in_db = mongo.db.users.find_one({"username": session["register"]})
         favourites = mongo.db.users.find(user_in_db)
 
-        # Defines favourite_recipes array from current User document
+        # Defines favourite_movies array from current User document
         favourites_movies = user_in_db["favourite_movies"]
 
         favs = mongo.db.movies.find({"_id": {
@@ -138,6 +164,10 @@ def profile(username):
 
 @app.route("/add_movie", methods=["GET", "POST"])
 def add_movie():
+    """
+    Inserts new movie to the movies collection when user submits
+    the form from the add_movie page.
+    """
     if request.method == "POST":
         movies = {
             "movie_title": request.form.get("movie_title"),
@@ -163,7 +193,12 @@ def add_movie():
 
 @app.route("/edit_movie/<movie_id>", methods=["GET", "POST"])
 def edit_movie(movie_id):
+    """
+    Allows users to edit the movie currently being viewed. 
+    User is brought to a form page based on the movies current fields.
+    """
     if request.method == "POST":
+        # captures the current forms data and  allows users to update the movie details
         edit = {
             "movie_title": request.form.get("movie_title"),
             "director": request.form.get("director"),
@@ -187,6 +222,9 @@ def edit_movie(movie_id):
 
 @app.route("/delete_movie/<movie_id>")
 def delete_movie(movie_id):
+    """
+    Allows users to delete the current movie 
+    """
     mongo.db.movies.remove({"_id": ObjectId(movie_id)})
     flash("Movie Succesfully Deleted")
     return redirect(url_for("get_movies"))
@@ -196,6 +234,9 @@ def delete_movie(movie_id):
 
 @app.route("/movie_review/<movie_id>", methods=["GET", "POST"])
 def movie_review(movie_id):
+    """
+    Path that allows users to add a review to the current movie
+    """
     if request.method == "POST":
         review = {
             "movie_title": request.form.get("movie_title"),
@@ -208,7 +249,7 @@ def movie_review(movie_id):
         mongo.db.review.insert_one(review)
         flash("Movie Successfully Reviewed")
         return redirect(url_for("get_movies"))
-
+    # finds the current movie 
     movie = mongo.db.movies.find_one({"_id": ObjectId(movie_id)})
     genre = mongo.db.genre.find().sort("genre_type", 1)
     return render_template("movie_review.html", movie=movie, genre=genre)
@@ -216,6 +257,9 @@ def movie_review(movie_id):
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
+    """
+    Allows users to add a review to the movie via the form on the add_review page
+    """
     if request.method == "POST":
         review = {
             "movie_title": request.form.get("movie_title"),
@@ -235,6 +279,9 @@ def add_review():
 
 @app.route("/delete_review/<reviews_id>")
 def delete_review(reviews_id):
+    """
+    Allows users to delete reviews they have created
+    """
     mongo.db.review.remove({"_id": ObjectId(reviews_id)})
     flash("Review Succesfully Deleted")
 
@@ -248,24 +295,28 @@ def delete_review(reviews_id):
 
 @app.route('/add_favourites/<movie_id>', methods=["GET", "POST"])
 def add_favourites(movie_id):
+    """
+    Allows users the ability to add movies to their favourites
+    """
     # Checks if user is in session
     if 'register' in session:
         # Identifies the current user
         user = mongo.db.users.find_one({"username": session['register']})
 
         favourites = user['favourite_movies']
-
+        # Makes sure the movie is not already in the user's favourites and then adds to favourites
         if ObjectId(movie_id) not in favourites:
+            
             mongo.db.users.update_one(
                 {"username": session['register']},
                 {"$push": {"favourite_movies": ObjectId(movie_id)}})
-
+            
             mongo.db.movies.update(
                 {'_id': ObjectId(movie_id)},
                 {'$inc': {'favourite_count': 1}})
 
         else:
-
+            # If the movie is already in the User's favourites, the below message is displayed
             flash("You have already added this Movie to your Favourites")
             return redirect(url_for('movie_details',
                                     user=user['username'], movie_id=movie_id))
@@ -277,16 +328,20 @@ def add_favourites(movie_id):
 
 @app.route('/remove_favourites/<movie_id>', methods=["GET", "POST"])
 def remove_favourites(movie_id):
+    """
+    Allows users to remove favourites 
+    """
+    # identifies the current user
     username = mongo.db.users.find_one({"username": session['register']})
     user = mongo.db.users.find_one({"username": session['register']})
 
     favourites = user['favourite_movies']
-
+    # checks if Movie is in users favourites and remove it from favourites
     if ObjectId(movie_id) in favourites:
         mongo.db.users.update(
             {"username": session['register']},
             {"$pull": {"favourite_movies": ObjectId(movie_id)}})
-
+        
         mongo.db.movies.update(
             {'_id': ObjectId(movie_id)},
             {'$inc': {'favourite_count': -1}})
@@ -304,7 +359,9 @@ def remove_favourites(movie_id):
 
 
 # Errors #
-
+"""
+Path to customised error pages
+"""
 @app.errorhandler(403)
 def page_forbidden(e):
     return render_template('403.html'), 403
