@@ -81,6 +81,14 @@
                 <!-- Upload Trailer  -->
                 <div class="row">
                     <div class="input-field col s12">
+                        <input id="itunes" name="itunes" type="url" class="validate" 
+                        value="{{ movie.itunes }}" required>
+                        <label for="itunes">Add URL for itunes link</label>
+                    </div>
+                </div>
+                <!-- Upload Trailer  -->
+                <div class="row">
+                    <div class="input-field col s12">
                         <input id="trailer" name="trailer" type="url" class="validate" 
                         value="{{ movie.trailer }}" required>
                         <label for="trailer">Add embedded URL for Movie Trailer</label>
