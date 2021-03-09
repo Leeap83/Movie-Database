@@ -180,7 +180,9 @@ def add_movie():
             "plot": request.form.get("plot"),
             "poster_image": request.form.get("poster_image"),
             "trailer": request.form.get("trailer"),
-            "created_by": session["register"]
+            "created_by": session["register"],
+            "itunes": request.form.get("itunes"),
+            "amazon": request.form.get("amazon")
         }
         mongo.db.movies.insert_one(movies)
         flash("Movie Added")
@@ -194,11 +196,11 @@ def add_movie():
 @app.route("/edit_movie/<movie_id>", methods=["GET", "POST"])
 def edit_movie(movie_id):
     """
-    Allows users to edit the movie currently being viewed. 
+    Allows users to edit the movie currently being viewed.
     User is brought to a form page based on the movies current fields.
     """
     if request.method == "POST":
-        # captures the current forms data and  allows users to update the movie details
+        # captures current forms data and allows users to update details
         edit = {
             "movie_title": request.form.get("movie_title"),
             "director": request.form.get("director"),
@@ -210,7 +212,9 @@ def edit_movie(movie_id):
             "plot": request.form.get("plot"),
             "poster_image": request.form.get("poster_image"),
             "trailer": request.form.get("trailer"),
-            "created_by": session["register"]
+            "created_by": session["register"],
+            "itunes": request.form.get("itunes"),
+            "amazon": request.form.get("amazon")
         }
         mongo.db.movies.update({"_id": ObjectId(movie_id)}, edit)
         flash("Movie Successfully Edited")
@@ -223,7 +227,7 @@ def edit_movie(movie_id):
 @app.route("/delete_movie/<movie_id>")
 def delete_movie(movie_id):
     """
-    Allows users to delete the current movie 
+    Allows users to delete the current movie
     """
     mongo.db.movies.remove({"_id": ObjectId(movie_id)})
     flash("Movie Succesfully Deleted")
@@ -249,7 +253,7 @@ def movie_review(movie_id):
         mongo.db.review.insert_one(review)
         flash("Movie Successfully Reviewed")
         return redirect(url_for("get_movies"))
-    # finds the current movie 
+    # finds the current movie
     movie = mongo.db.movies.find_one({"_id": ObjectId(movie_id)})
     genre = mongo.db.genre.find().sort("genre_type", 1)
     return render_template("movie_review.html", movie=movie, genre=genre)
@@ -258,7 +262,8 @@ def movie_review(movie_id):
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
     """
-    Allows users to add a review to the movie via the form on the add_review page
+    Allows users to add a review to the movie
+    via the form on the add_review page
     """
     if request.method == "POST":
         review = {
@@ -304,19 +309,21 @@ def add_favourites(movie_id):
         user = mongo.db.users.find_one({"username": session['register']})
 
         favourites = user['favourite_movies']
-        # Makes sure the movie is not already in the user's favourites and then adds to favourites
+        # Makes sure the movie is not already in the user's
+        # favourites and then adds to favourites
         if ObjectId(movie_id) not in favourites:
-            
+
             mongo.db.users.update_one(
                 {"username": session['register']},
                 {"$push": {"favourite_movies": ObjectId(movie_id)}})
-            
+
             mongo.db.movies.update(
                 {'_id': ObjectId(movie_id)},
                 {'$inc': {'favourite_count': 1}})
 
         else:
-            # If the movie is already in the User's favourites, the below message is displayed
+            # If the movie is already in the User's favourites,
+            # the below message is displayed
             flash("You have already added this Movie to your Favourites")
             return redirect(url_for('movie_details',
                                     user=user['username'], movie_id=movie_id))
@@ -329,7 +336,7 @@ def add_favourites(movie_id):
 @app.route('/remove_favourites/<movie_id>', methods=["GET", "POST"])
 def remove_favourites(movie_id):
     """
-    Allows users to remove favourites 
+    Allows users to remove favourites
     """
     # identifies the current user
     username = mongo.db.users.find_one({"username": session['register']})
@@ -341,7 +348,7 @@ def remove_favourites(movie_id):
         mongo.db.users.update(
             {"username": session['register']},
             {"$pull": {"favourite_movies": ObjectId(movie_id)}})
-        
+
         mongo.db.movies.update(
             {'_id': ObjectId(movie_id)},
             {'$inc': {'favourite_count': -1}})
