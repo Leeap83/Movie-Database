@@ -23,7 +23,7 @@ mongo = PyMongo(app)
 @app.route("/index")
 def index():
     """
-    Home Page for the Website. Invites users to Start Browsing, 
+    Home Page for the Website. Invites users to Start Browsing
     Sign-In or Register a new account
     """
     return render_template("index.html")
@@ -40,8 +40,10 @@ def get_movies():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     """
-    Search bar that uses the indexes created in MongoDB's allows the users to search for any movie title, director or actor name.
-    The results are then displayed. If there are no results for the user's query, then message displayed telling user no matches.
+    Search bar that uses the indexes created in MongoDB's allows the users to
+    search for any movie title, director or actor name. The results are then
+    displayed. If there are no results for the user's query, then message
+    displayed telling user no matches.
     """
     query = request.form.get("query")
     movies = list(mongo.db.movies.find({"$text": {"$search": query}}))
@@ -50,10 +52,10 @@ def search():
 
 @app.route("/movie_details/<movie_id>")
 def movie_details(movie_id):
-    """ Movie Details page. Displays the movie details stored in MongoDB after users clicks
-    view more button
+    """ Movie Details page. Displays the movie details stored in
+    MongoDB after users clicks view more button
     """
-    # identifies the current movie and returns the movie details 
+    # identifies the current movie and returns the movie details
     movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
     # Finds and returns all reviews stored on the MongoDB
     review = mongo.db.review.find().sort("review_date", 1)
@@ -61,7 +63,6 @@ def movie_details(movie_id):
 
 
 # User functions #
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
@@ -70,18 +71,18 @@ def register():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-        # Check if username is already registered 
+        # Check if username is already registered
         if existing_user:
             flash("Username exists try another")
             return redirect(url_for("register"))
-        # Creates a new user with a hashed password and creates a favourites array
+        # Creates a new user with a hashed password
         register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
             "favourite_movies": []
         }
         mongo.db.users.insert_one(register)
-        # logs user into session cookie called 'register' 
+        # logs user into session cookie called 'register'
         session["register"] = request.form.get("username").lower()
         flash("Successfully registered, welcome!")
         return redirect(url_for("profile", username=session["register"]))
@@ -91,30 +92,33 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
-    Logs the user into the website. 
+    Logs the user into the website.
     """
     if request.method == "POST":
         # Check if user is registered
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-        # if existing user, redirects user to profile page 
+        # if existing user, redirects user to profile page
         if existing_user:
-
+            # ensures hashed password matches user input
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
-                session["register"] = request.form.get("username").lower()
-                flash("Welcome, {}".format(
-                    request.form.get("username")))
-                return redirect(url_for(
-                    "profile", username=session["register"]))
-            
+                    session["register"] = request.form.get("username").lower()
+                    flash("Welcome, {}".format(
+                        request.form.get("username")))
+                    return redirect(url_for(
+                        "profile", username=session["register"]))
+
             else:
+                # invalid password match
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
-        # if not an existing user, redirects user to login page 
+
         else:
+            # if not an existing user, redirects user to login page
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
+
     return render_template("login.html")
 
 
@@ -369,6 +373,8 @@ def remove_favourites(movie_id):
 """
 Path to customised error pages
 """
+
+
 @app.errorhandler(403)
 def page_forbidden(e):
     return render_template('403.html'), 403
