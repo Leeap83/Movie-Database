@@ -103,11 +103,11 @@ def login():
             # ensures hashed password matches user input
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
-                    session["register"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(
-                        request.form.get("username")))
-                    return redirect(url_for(
-                        "profile", username=session["register"]))
+                session["register"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(
+                    request.form.get("username")))
+                return redirect(url_for(
+                    "profile", username=session["register"]))
 
             else:
                 # invalid password match

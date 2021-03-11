@@ -242,9 +242,11 @@ favourites.
 ### Code Validation
 The Freeformatter HTML Validator and W3C CSS Validator were used to validate every page of the project to ensure there were no errors in the project.
 
-[CSS Validator](http://jigsaw.w3.org/css-validator/) - [Results]()
+[CSS Validator](http://jigsaw.w3.org/css-validator/) - [Results](docs/CSS validator.jpeg)
 
 [HTML Validator](https://validator.w3.org/) - [Results]()
+
+[JSHint](https://jshint.com/) - [Results](docs/jshint.jpeg)
 
 ### Devices
 The website was tested on laptop, desktop, iphone, ipad on the following browsers:
