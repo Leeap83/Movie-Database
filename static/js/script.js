@@ -4,6 +4,9 @@
     $('select').formSelect();
     $("input[type='radio'] [name='rating']:checked").val();
     $('.modal').modal();
+    $('#topBtn').click(function(){
+        $('html ,body').animate({scrollTop : 0},800);
+    });
     $('.datepicker').datepicker({
         format: "dd mmmm, yyyy",
         yearRange: [1950,2025],

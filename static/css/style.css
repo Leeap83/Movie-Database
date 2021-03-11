@@ -92,6 +92,18 @@ h2 {
     width: 150px;
 }
 
+#topBtn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    font-size: 25px;
+    width: 50px;
+    background: #26a69a;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
 /*---------------Favourites*/
 
 .fa-heart {
