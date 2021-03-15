@@ -244,11 +244,16 @@ favourites.
 ### Code Validation
 The Freeformatter HTML Validator and W3C CSS Validator were used to validate every page of the project to ensure there were no errors in the project.
 
-[CSS Validator](http://jigsaw.w3.org/css-validator/) - [Results](docs/CSS validator.jpeg)
+[CSS Validator](http://jigsaw.w3.org/css-validator/) - [Results](docs/CSS-validator.jpeg)
 
-[HTML Validator](https://validator.w3.org/) - [Results]()
+[HTML Validator](https://validator.w3.org/) - [Results](docs/movies-validation.pdf) the results show a warning "lack of heading for section" the section displays 
+the flash messages that displays success/error messages which doesnt require a header.
 
 [JSHint](https://jshint.com/) - [Results](docs/jshint.jpeg)
+
+Lighthouse was used on Google Chrome to help improve perfomance and accessability. This helped improve the contrast issue with background
+and foreground colours - [Results](docs/lighthouse.pdf)
+
 
 ### Devices
 The website was tested on laptop, desktop, iphone, ipad on the following browsers:
@@ -261,16 +266,17 @@ The website was tested on laptop, desktop, iphone, ipad on the following browser
 ### 1. Responsive on all devices 
 - Chrome Dev Tools was used to check the sites compatiability all all devices. A link to the site was tested on iphone and ipad.
 ### 2. Navbar 
-- The Navbar links were all tested on the main navbar and the sidenav for small screen resolutions.
+- The Navbar links were all tested on the main navbar and the sidenav for small screen resolutions, the appropriate pages opened when clicked.
 ### 3. Homepage 
-- The homepage links for find a movie, register or log in were all clicked and testd. 
+- The homepage links for find a movie, register or log in were all clicked and the appropriate page was loaded. 
 ### 4. All Movies 
 - All movie cards were tested to ensure that the correct movie details were revealed and that the correct buttons for registered 
 and non-registered users, the add a review, edit movie and delete movie links were tested. The view movie details buttons were tested
-on all movie cards.     
+on all movie cards and the appropriate movie details was returned.     
 ### 5. Search Bar 
-- The search bar was tested and random film titles, actors name and directors name were searched for and the reset button 
-was clicked and all movies were returned. 
+- The search bar was tested for random film titles, actors name and directors name were searched and the correct results were returned.
+- The reset button was tested to ensure all films were displayed after a search query was raised and they were.
+- A film title that wasnt stored was searched for and an error was returned. ![search](static/images/search_error.jpeg)   
 ### 6. Movie Detail Page 
 - The Movie details button was clicked and the movie_detials were returned all movies were tested.
 - The collapsible list for the reviews was tested to ensure all review details for that movie. 
@@ -281,11 +287,12 @@ was clicked and all movies were returned.
 - The registration form was tested to register new users to the database. 
 ### 8. Add Movie
 - The add movie form was used to add 120 movies to the site.
-- After each movie was added the search bar was tested to return the new movie.
-- The card reveal was tested to see if the relevant movie info was displayed.
+- After each movie was added the search bar was tested to check and the new movie was returned.
+- The card reveal was tested to see if the relevant movie info was displayed and it was.
 - The view movie details button was clicked and all the links were tested.
 ### 9. Edit Movie
-- The edit movie button was clicked to randomly update different fields for individual movies.
+- The edit movie button was clicked to randomly update different fields for individual movies and the movies were edited successfully.
+![edited](static/images/editSuccess.png) 
 - The visability of the edit movie button was tested to ensure it was visible for all users and
 not visable for non-registered users.
 ### 10. Delete Movies 
@@ -298,7 +305,7 @@ stored in the database under the users collection and the favourite_count was in
 - The remove favourite was tested to remove mutiple movies from different users profiles and checked the users collection
 in the database and also checked the favourite_count in the movies collection to ensure it was reduced by 1.
 ### 12. Add Reviews 
-- The add review link in the card reveal panel and in the navbar were tested and used to add a number of reviews to random movies
+- The add review link in the card reveal panel and in the navbar was tested and was used to add a number of reviews to random movies
 - The profile page was checked to ensure that the users added reviews appeared for that user.
 - The movie details paged was checked to ensure that reviews created appeared.
 ### 13. Delete Reviews
@@ -324,7 +331,7 @@ in the database and also checked the favourite_count in the movies collection to
 * to be able to see key information regarding this movie.
 
     (a) The user can see basic movie deatails on the card reveal.
-    ![Card Reveal](static/images/cardReveal.jpeg)
+    ![Card Reveal](static/images/cardReveal.png)
 
     (b)The user can see all movie deatails stored in the database on the movie_details.page.
     ![Card Reveal](static/images/movieDetails.jpeg)
@@ -354,12 +361,12 @@ in the database and also checked the favourite_count in the movies collection to
 * to be able to change or delete any reviews I have left.
 
     (a) Users can delete any of their reviews from the profile
-    ![delete Review](static/images/delrev.jpeg)
+    ![delete Review](static/images/profilereview.jpeg)
 
 * to be able to change or delete any movies I have added. 
 
     (a) Users can edit any movies on the database by clicking the edit button
-    on the card reveal panel.
+    on the card reveal panel.![delete Review](static/images/editMovie.jpeg)
 
     (b) Users can delete only movies they have added by clicking the delete button
     on the card reveal panel.
