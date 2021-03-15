@@ -4,7 +4,7 @@
     
     
     <div class="container">
-        <div class="row card-panel blue-grey">
+        <div class="row card-panel blue-grey lighten-4">
             <form class="col s12" method="POST" action="{{ url_for('add_movie') }}" enctype="multipart/form-data">
                 <!-- Movie Title -->
                 <div class="row">
@@ -44,13 +44,13 @@
                 <!-- Genre Selector -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <select id="genre_type" name="genre_type" class="validate" required>
-                            <option value="" disabled selected>Choose Genre</option>
-                            {% for genres in genre %}
-                                <option value="{{ genres.genre_type }}">{{ genres.genre_type }}</option>
-                            {% endfor %}
-                        </select> 
-                        <label for="genre_type">Genre</label>
+                        <label for="genre_type">Choose a genre</label>
+                            <select name="genre_type" id="genre_type"  class="validate" required>
+                                <option value="" disabled selected></option>
+                                {% for genres in genre %}
+                                    <option value="{{ genres.genre_type }}">{{ genres.genre_type }}</option>
+                                {% endfor %}
+                            </select> 
                     </div>
                 </div>
                 <!-- Release Date -->
@@ -100,10 +100,10 @@
                 <!-- Submit Button-->
                 <div class="row">
                     <div class="col s12 center-align">
-                        <button type="submit" class="btn-large">
+                        <button type="submit" class="btn-large teal darken-2">
                             Add Movie <i class="fas fa-plus-square right"></i>
                         </button>
-                         <a href="{{ url_for('get_movies')}}" class="btn-large red">
+                         <a href="{{ url_for('get_movies')}}" class="btn-large red darken-4">
                             Cancel <i class="fas fa-times-circle right"></i>
                         </a>
                     </div>

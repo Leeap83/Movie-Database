@@ -127,9 +127,11 @@ As a user I would like...
 ### Colour Scheme:
 
 The colours used throughout the app are Materialized colours
-- blue-grey darken-1 used for the background colour for cards and forms
-- teal lighten-1 was used for the Navbar and buttons.
-- blue-grey-text text-lighten-5 was used on all input fields on the forms.
+- blue-grey lighten-4 used for the background colour for forms
+- teal darken-2 was used for background colour of the Navbar and submit buttons.
+- red darken-4 was used for background colour of the Cancel and delete buttons.
+- black text was used on all input fields on the forms so it didn't contrast against the background.
+- White text was used for navbar and buttons so it didnt contrast against the background
 
 ### Typography: 
     

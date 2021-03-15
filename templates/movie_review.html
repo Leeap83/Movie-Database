@@ -2,7 +2,7 @@
 {% block content %}
     <h3 class="center-align">Review a Movie</h3>
     <div class="container">
-        <div class="row card-panel blue-grey darken-1">
+        <div class="row card-panel blue-grey lighten-4">
             <form class="col s12" method="POST" action="{{ url_for('movie_review', movie_id=movie._id) }}">
                 <!-- Movie Title -->
                 <div class="row">
@@ -54,10 +54,10 @@
                 <!-- Submit Button-->
                 <div class="row">
                     <div class="col s12 center-align">
-                        <button type="submit" class="btn-large">
+                        <button type="submit" class="btn-large teal darken-2">
                             Post <i class="fas fa-edit right"></i>
                         </button>
-                        <a href="{{ url_for('get_movies')}}" class="btn-large red">
+                        <a href="{{ url_for('get_movies')}}" class="btn-large red darken-4">
                             Cancel <i class="fas fa-times-circle right"></i>
                         </a>
                     </div>

@@ -77,8 +77,8 @@
                                 </div>
                             </div>
                             <!-- Card Links -->
-                            <div class="View More">
-                                <p class="card-link btn"><a href="{{ url_for('movie_details', movie_id=movie._id) }}" class="white-text">View Movie Details</a></p>
+                            <div class="View-More">
+                                <p class="card-link btn"><a href="{{ url_for('movie_details', movie_id=movie._id) }}">View Movie Details</a></p>
                             </div>
                             <br>
                             <div class="user-session">
@@ -95,7 +95,7 @@
                 </div>                   
             {% endfor %}
             <!-- Return to top -->
-            <button id="topBtn"><i class="fas fa-chevron-up teal darken-2"></i>     To Top</button>  
+            <button id="topBtn"><i class="fas fa-chevron-up teal darken-2 white-text"> To Top</i></button>  
         </div>
     </div>
     {% else %}

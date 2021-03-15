@@ -2,25 +2,25 @@
 {% block content %}
     <h3 class="center-align">Review a Movie</h3>
     <div class="container">
-        <div class="row card-panel blue-grey darken">
+        <div class="row card-panel blue-grey lighten-4">
             <form class="col s12" method="POST" action="{{ url_for('add_review') }}">
                 <!-- Movie Title -->
                <div class="row">
                     <div class="input-field col s12">
-                        <select id="movie_title" name="movie_title" class="validate" required>
-                            <option value="" disabled selected>Choose Movie</option>
-                            {% for movies in movie %}
-                                <option value="{{ movies.movie_title }}">{{ movies.movie_title }}</option>
-                            {% endfor %}
-                        </select> 
                         <label for="movie_title">Movie</label>
+                            <select id="movie_title" name="movie_title" class="validate" required>
+                                <option value="" disabled selected></option>
+                                {% for movies in movie %}
+                                    <option value="{{ movies.movie_title }}">{{ movies.movie_title }}</option>
+                                {% endfor %}
+                            </select> 
                     </div>
                 </div>   
                 <!-- 5 star rating -->
                 <div class="row ratings">
                     <div class="col s12">
-                        <h6 class="white-text">Star Rating</h6>
                         <div class="stars" id="checked">
+                            <label for="Rating">Star Rating: </label>
                             <input type="radio" class="star-input rated" name="rating" id="star-1" value="1">
                             <label for="star-1" class="star"><i class="fas fa-star"></i></label> 
                             <input type="radio" class="star-input" name="rating" id="star-2" value="2">
@@ -58,10 +58,10 @@
                 <!-- Submit Button-->
                 <div class="row">
                     <div class="col s12 center-align">
-                        <button type="submit" class="btn-large">
+                        <button type="submit" class="btn-large teal darken-2">
                             Post <i class="fas fa-edit right"></i>
                         </button>
-                        <a href="{{ url_for('get_movies')}}" class="btn-large red">
+                        <a href="{{ url_for('get_movies')}}" class="btn-large red darken-4">
                             Cancel <i class="fas fa-times-circle right"></i>
                         </a>
                     </div>
