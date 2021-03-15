@@ -131,7 +131,7 @@ The colours used throughout the app are Materialized colours
 - teal darken-2 was used for background colour of the Navbar and submit buttons.
 - red darken-4 was used for background colour of the Cancel and delete buttons.
 - black text was used on all input fields on the forms so it didn't contrast against the background.
-- White text was used for navbar and buttons so it didnt contrast against the background
+- White text was used for navbar and buttons so it didn't contrast against the background
 
 ### Typography: 
     

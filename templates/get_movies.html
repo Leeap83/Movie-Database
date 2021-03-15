@@ -51,9 +51,9 @@
                         <div class="card-reveal">
                             <div class="row">
                                 <div class="col s12">
-                                    <div class="card-title activator grey-text text-darken-4">
+                                    <div class="card-title activator">
                                         <div class="col s10">
-                                            <h5 class="card-title grey-text text-darken-4">{{ movie.movie_title}}</h5>
+                                            <h5 class="card-title">{{ movie.movie_title}}</h5>
                                         </div>
                                         <div class="col s2">
                                             <i class="fas fa-times right"></i>
@@ -78,7 +78,7 @@
                             </div>
                             <!-- Card Links -->
                             <div class="View-More">
-                                <p class="card-link btn"><a href="{{ url_for('movie_details', movie_id=movie._id) }}">View Movie Details</a></p>
+                                <p class="card-link btn"><a href="{{ url_for('movie_details', movie_id=movie._id) }}" class="white-text">View Movie Details</a></p>
                             </div>
                             <br>
                             <div class="user-session">
