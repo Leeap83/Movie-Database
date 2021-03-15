@@ -29,9 +29,7 @@ main {
 .card .card-title {
     font-size: 18px;
 }
-.input-field label {
-    color: #eceff1
-}
+
 
 .fav {
     width: 100px;
@@ -40,14 +38,16 @@ main {
 /*---------------Navbar*/
 nav .logo {
     font-size: 50px;
-    padding-left: 10px;
+    padding-left: 10px;   
 }    
 
 nav ul a {
     font-size: 18px;    
     font-weight: 500;
 }
-
+nav {
+    
+}
 /*---------------home page*/
 
 .banner {
@@ -96,14 +96,14 @@ h2 {
     position: fixed;
     bottom: 40px;
     right: 40px;
-    font-size: 25px;
-    width: 50px;
     background: #26a69a;
-    color: #fff;
     border: none;
     cursor: pointer;
 }
-
+/*---------------Forms*/
+.input-field label{
+    color: #f4f6f7;
+}
 /*---------------Favourites*/
 
 .fa-heart {

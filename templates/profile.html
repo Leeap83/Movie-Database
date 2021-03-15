@@ -18,7 +18,7 @@
                             <img src="{{favourite.poster_image }}" alt="{{favourite.movie_title}} image" height="400px">
                         </a>  
                     </div>
-                    <div class="card-content blue-grey darken-1 white-text">
+                    <div class="card-content blue-grey darken white-text">
                         <div class="row">
                             <div class="col s12 card-title activator">
                                 <div class="row">
@@ -51,7 +51,8 @@
                             <p><strong>"{{ reviews.review_title}}"</strong>&nbsp;{{ reviews.rating}}/5</p>
                         </div>
                         <div class="collapsible-body">
-                            <p>"{{ reviews.review }}"</p>
+                            <p><strong>{{ reviews.movie_title }}</strong></p>
+                            <p>{{ reviews.review }}</p>
                             <br>
                             <p><strong>Review Date:</strong> {{ reviews.review_date }}</p>
                             <p><strong>Reviewed By:</strong> {{ reviews.created_by }}</p>
