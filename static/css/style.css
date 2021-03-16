@@ -165,3 +165,21 @@ footer .copyright {
 footer .copyright a {
     color: #fff;
 }
+
+@media only screen and (max-width: 330px) {
+    .banner {
+        position: inherit;
+    }
+    nav .logo {
+        font-size: 200%;
+    }
+    .card .card-action {
+        padding: 10px 10px;
+    }
+    .card h2 {
+        font-size: 2.1rem;
+    }
+    main {
+        overflow: hidden;
+    }
+}
