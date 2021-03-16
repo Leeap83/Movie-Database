@@ -394,6 +394,9 @@ in the database and also checked the favourite_count in the movies collection to
 - A movie with a really long movie title forces the cards to display with blank card spaces. 
 - During the lighthouse audit, the performance and best practice could be improved by the inclusion of 
 a file uploader so that images are properly sized and the would use HTTPS. 
+- During manual test for mobile responsiveness issue arised for iphone 5 sidenav dropped below navbar, white space appeared down
+the right hand side of the screen pusing content over. This was resolved by adding a media query the logo font sized was reduced,
+background image position was changed from relative and overflow was changed to hidden for the main section.
 
 # Deployment 
 
