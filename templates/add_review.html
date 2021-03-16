@@ -9,7 +9,7 @@
                     <div class="input-field col s12">
                         <label for="movie_title">Movie</label>
                             <select id="movie_title" name="movie_title" class="validate" required>
-                                <option value="" disabled selected></option>
+                                <option value="">&nbsp;</option>
                                 {% for movies in movie %}
                                     <option value="{{ movies.movie_title }}">{{ movies.movie_title }}</option>
                                 {% endfor %}
@@ -20,7 +20,7 @@
                 <div class="row ratings">
                     <div class="col s12">
                         <div class="stars" id="checked">
-                            <label for="Rating">Star Rating: </label>
+                            <label>Star Rating: </label>
                             <input type="radio" class="star-input rated" name="rating" id="star-1" value="1">
                             <label for="star-1" class="star"><i class="fas fa-star"></i></label> 
                             <input type="radio" class="star-input" name="rating" id="star-2" value="2">

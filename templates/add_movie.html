@@ -46,7 +46,7 @@
                     <div class="input-field col s12">
                         <label for="genre_type">Choose a genre</label>
                             <select name="genre_type" id="genre_type"  class="validate" required>
-                                <option value="" disabled selected></option>
+                                <option value="">&nbsp;</option>
                                 {% for genres in genre %}
                                     <option value="{{ genres.genre_type }}">{{ genres.genre_type }}</option>
                                 {% endfor %}
