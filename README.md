@@ -180,6 +180,9 @@ favourites.
 ## Future Development
 * Users ability to edit their profile page, change username and reset password.
 * Return review rating value to 5 stars instaead of value.
+* A file uploader such as Filepond or Cloudinary to be implemented so users can upload images/files instaed of relying on url links to movie
+poster images. 
+ 
 
 # Technologies Used
  
@@ -246,8 +249,8 @@ The Freeformatter HTML Validator and W3C CSS Validator were used to validate eve
 
 [CSS Validator](http://jigsaw.w3.org/css-validator/) - [Results](docs/CSS-validator.jpeg)
 
-[HTML Validator](https://validator.w3.org/) - [Results](docs/movies-validation.pdf) the results show a warning "lack of heading for section" the section displays 
-the flash messages that displays success/error messages which doesnt require a header.
+[HTML Validator](https://validator.w3.org/) - [Results](docs/HTML-Validation.pdf) the results show a warning "lack of heading for section", the section displays 
+the flash messages that displays success/error messages when user logs in, adds/removes files.
 
 [JSHint](https://jshint.com/) - [Results](docs/jshint.jpeg)
 
@@ -264,7 +267,8 @@ The website was tested on laptop, desktop, iphone, ipad on the following browser
 
 ### Manual Tests for functionality of features
 ### 1. Responsive on all devices 
-- Chrome Dev Tools was used to check the sites compatiability all all devices. A link to the site was tested on iphone and ipad.
+- Chrome Dev Tools was used to check the sites compatiability all all devices. 
+- A link to the site was tested on iphone and ipad.
 ### 2. Navbar 
 - The Navbar links were all tested on the main navbar and the sidenav for small screen resolutions, the appropriate pages opened when clicked.
 ### 3. Homepage 
@@ -387,9 +391,9 @@ in the database and also checked the favourite_count in the movies collection to
     (a) The user can follow the links in the movie details page to Amazon or Itunes.
     
 ## Bugs
-- A movie with a really long movie title forces the cards to display with blank spaces.
-
-
+- A movie with a really long movie title forces the cards to display with blank card spaces. 
+- During the lighthouse audit, the performance and best practice could be improved by the inclusion of 
+a file uploader so that images are properly sized and the would use HTTPS. 
 
 # Deployment 
 
@@ -434,22 +438,29 @@ the env.py file:
 # Credits
 
 **Code**
-* Error Pages - [Flask Pallets Projects](https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/) was read to understand how to create
+* Error Pages: [Flask Pallets Projects](https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/) was read to understand how to create
 custom error pages.
 
+* Materialize: [Materialize](https://materializecss.com/) was used throughout the project to ensure the website was responsive.
+Code from materialize was used and developed on for the collapsible, forms, datepicker.
+
+* Various YouTube & Google searches assisted with the star rating in the movie review.
 
 
 **Content & Media**
 
 - The Homepage background image was sourced from [Pixabay](https://pixabay.com/photos/starwars-fantasy-movie-figure-5355787/) and the authours was enriquelopezgarre 
-- All other images are links to the url from google search for movie posters
+- All other images are links to the url from google search for movie posters.
 - Giphy was used to source the Images on the error pages.
+- [IMDB](https://www.imdb.com/) was used for refrence to movie details. 
 
 
 **Acknowledgements**
 
 * My Mentor Aaron Sinnott for feedback
 * Code Institute for training
-
+* WS3 schools for reference on coding issues
+* Stackoverflow for reference on coding issues
+* YouTube online tutorials used when encountered coding issues
 
  
